@@ -20,7 +20,7 @@ export default (
   });
 
   return {
-    code: `export default ${JSON.stringify(result.code)};`,
+    code: result.code, // `export default ${JSON.stringify(result.code)};`,
     map: normalizeSourceMap(result.map!, request, filename),
   };
 };

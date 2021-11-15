@@ -1,10 +1,9 @@
 import qs from 'qs';
 
-// "webpack5": "npm:webpack@^5.0.0"
-import BasicEffectRulePlugin from 'webpack5/lib/rules/BasicEffectRulePlugin';
-import BasicMatcherRulePlugin from 'webpack5/lib/rules/BasicMatcherRulePlugin';
-import RuleSetCompiler from 'webpack5/lib/rules/RuleSetCompiler';
-import UseEffectRulePlugin from 'webpack5/lib/rules/UseEffectRulePlugin';
+const BasicEffectRulePlugin = require('webpack/lib/rules/BasicEffectRulePlugin');
+const BasicMatcherRulePlugin = require('webpack/lib/rules/BasicMatcherRulePlugin');
+const RuleSetCompiler = require('webpack/lib/rules/RuleSetCompiler');
+const UseEffectRulePlugin = require('webpack/lib/rules/UseEffectRulePlugin');
 
 const ruleSetCompiler = new RuleSetCompiler([
   new BasicMatcherRulePlugin('test', 'resource'),
@@ -30,12 +29,14 @@ const NS = 'san-loader';
 class SanLoaderPlugin {
   static NS?: string;
   apply(compiler) {
-    // add NS marker so that the loader can detect and report missing plugin
+    const normalModule = compiler.webpack
+      ? compiler.webpack.NormalModule
+      : require('webpack/lib/NormalModule');
+
     compiler.hooks.compilation.tap(id, (compilation) => {
       const normalModuleLoader =
-        require('webpack/lib/NormalModule').getCompilationHooks(
-          compilation
-        ).loader;
+        normalModule.getCompilationHooks(compilation).loader;
+
       normalModuleLoader.tap(id, (loaderContext) => {
         loaderContext[NS] = true;
       });
@@ -46,7 +47,6 @@ class SanLoaderPlugin {
     let sanRules = [];
 
     for (const rawRule of rules) {
-      // skip the `include` check when locating the san rule
       const clonedRawRule = Object.assign({}, rawRule);
       delete clonedRawRule.include;
 

@@ -9,10 +9,6 @@ export default {
       name: 'San',
     };
   },
-  created() {
-    console.log('created');
-    throw new Error('error');
-  },
 };
 </script>
 

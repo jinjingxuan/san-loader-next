@@ -1,5 +1,5 @@
 import qs from 'qs';
-import RuleSet from 'webpack/lib/RuleSet.js';
+const RuleSet = require('webpack/lib/RuleSet');
 
 const id = 'san-loader-plugin';
 const NS = 'san-loader';

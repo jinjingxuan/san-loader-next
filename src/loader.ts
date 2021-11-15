@@ -43,7 +43,7 @@ export default function (source) {
       );
     } else if (query.type === 'style') {
       result = transformStyle(
-        descriptor?.styles[query.index].content!,
+        descriptor?.styles[query.index as string].content!,
         rawQuery,
         filename,
         options,
@@ -56,8 +56,6 @@ export default function (source) {
       };
     }
     if (this.sourceMap) {
-      console.log(result.map);
-
       this.callback(null, result.code, result.map);
     } else {
       this.callback(null, result.code);
@@ -93,13 +91,15 @@ export default function (source) {
     );
 
     const output = [
-      `import runtime from ${runtimeCodePath};`,
+      `import $runtime from ${runtimeCodePath};`,
       scriptImport,
       templateImport,
       stylesImport,
-      'export default runtime(script, template, $style);',
+      'export default $runtime(script, template, $style);',
       '/* san-hmr component */',
     ];
+
+    console.log(output);
 
     this.callback(null, output.join('\n'));
   }
