@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "dist",
+    "allowJs": true,
+    "sourceMap": true,
+    "module": "esnext",
+    "target": "esnext",
+    "lib": ["dom", "es2017"],
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "skipLibCheck": true,
+    "strict": false
+  },
+  "include": ["src/components/ts/*"],
+  "exclude": ["node_modules", "dist"]
+}

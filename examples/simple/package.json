@@ -1,0 +1,36 @@
+{
+  "name": "my-webpack-project",
+  "version": "1.0.0",
+  "private": "true",
+  "scripts": {
+    "start": "http-server -c-1 dist",
+    "build": "webpack --progress",
+    "dev": "webpack-dev-server"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "@webpack-cli/serve": "^1.6.0",
+    "babel-loader": "^8.2.3",
+    "css-loader": "^5.2.7",
+    "html-webpack-plugin": "^4.3.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "3.10.1"
+  },
+  "description": "My webpack project",
+  "babel": {
+    "plugins": [
+      "@babel/syntax-dynamic-import"
+    ],
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "modules": false
+        }
+      ]
+    ]
+  }
+}

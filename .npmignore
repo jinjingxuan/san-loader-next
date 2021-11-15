@@ -1,0 +1,9 @@
+examples
+src
+test
+.DS_Store
+node_modules
+.vscode
+coverage
+.github
+.editorconfig

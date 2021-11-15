@@ -1,0 +1,23 @@
+<template>
+  <div class="content">Hello {{name}}!</div>
+</template>
+
+<script>
+export default {
+  initData() {
+    return {
+      name: 'San',
+    };
+  },
+  created() {
+    console.log('created');
+    throw new Error('error');
+  },
+};
+</script>
+
+<style>
+.content {
+  color: blue;
+}
+</style>
