@@ -1,9 +1,9 @@
-import { compileTemplate } from 'san-sfc-compiler';
+import { compileTemplate, SFCBlock } from 'san-sfc-compiler';
 import { Options } from '..';
 import { Query, normalizeSourceMap } from '../utils';
 
 export default (
-  code: string,
+  template: SFCBlock,
   request: string,
   filename: string,
   options: Options,
@@ -11,7 +11,7 @@ export default (
   scoped?: boolean
 ) => {
   const result = compileTemplate({
-    source: code,
+    source: template.content,
     filename: query.filename!,
     id: `data-s-${query.id}`,
     scoped,

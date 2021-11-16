@@ -24,20 +24,24 @@ export default (
   options: Options
 ) => {
   let stylesCode = `var $style = {};`;
+  let styleRequest = '';
   // 全局开关
   let hasCSSModules = false;
+
   if (descriptor.styles.length) {
     descriptor.styles.forEach((style, i) => {
       const src = style.src || descriptor.filename;
-      const attrsQuery = attrsToQuery(
-        style.attrs,
-        'css',
-        !!options.styleCompileOptions?.preprocessLang
-      );
+      const attrsQuery = attrsToQuery(style.attrs, 'css');
       const idQuery = `&id=${scopeId}`;
       const srcQuery = style.src ? `&src` : ``;
       const query = `?san&type=style&index=${i}${srcQuery}${idQuery}`;
-      const styleRequest = src + query + attrsQuery;
+
+      if (style.src) {
+        styleRequest = style.src + '?module=';
+      } else {
+        styleRequest = src + query + attrsQuery;
+      }
+
       if (style.module) {
         if (!hasCSSModules) hasCSSModules = true;
         stylesCode += genCSSModulesCode(i, styleRequest, options.esModule!);

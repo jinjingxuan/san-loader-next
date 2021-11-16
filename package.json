@@ -12,7 +12,7 @@
     "build": "npm run lint && del dist/ && tsc",
     "lint": "prettier --write \"{src,test}/**/*.{ts,js}\"",
     "prepublishOnly": "npm run test && npm run build",
-    "local": "npm pack && cp *.tgz examples/san-loader.tgz && del *.tgz",
+    "local": "npm run build && cp -r dist/* examples/complex/node_modules/san-loader/dist",
     "test": "run-p test:*",
     "test:unit": "jest test/unit",
     "test:e2e": "jest test/e2e --no-cache"

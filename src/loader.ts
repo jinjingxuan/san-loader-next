@@ -34,7 +34,7 @@ export default function (source) {
     if (query.type === 'template') {
       const hasScoped = descriptor!.styles.some((s) => s.scoped);
       result = transformTemplate(
-        descriptor?.template?.content!,
+        descriptor?.template!,
         rawQuery,
         filename,
         options,
@@ -43,7 +43,7 @@ export default function (source) {
       );
     } else if (query.type === 'style') {
       result = transformStyle(
-        descriptor?.styles[query.index as string].content!,
+        descriptor?.styles!,
         rawQuery,
         filename,
         options,

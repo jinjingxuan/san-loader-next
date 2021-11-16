@@ -10,17 +10,23 @@ export default (
 ) => {
   const template = descriptor.template;
   let templateImport = `var template = '';`;
+  let templateRequest = '';
 
   if (template) {
-    const src = template.src || descriptor.filename;
-    const idQuery = `&id=${scopeId}`;
-    const srcQuery = template.src ? `&src` : ``;
-    const attrsQuery = attrsToQuery(template.attrs, 'html');
-    const query = `?san&type=template${idQuery}${srcQuery}${attrsQuery}`;
-    const templateRequest = JSON.stringify(src + query);
+    if (template.src) {
+      templateRequest = template.src;
+    } else {
+      const src = template.src || descriptor.filename;
+      const idQuery = `&id=${scopeId}`;
+      const srcQuery = template.src ? `&src` : ``;
+      const attrsQuery = attrsToQuery(template.attrs, 'html');
+      const query = `?san&type=template${idQuery}${srcQuery}${attrsQuery}`;
+      templateRequest = src + query;
+    }
+
     templateImport = options.esModule
-      ? `import template from ${templateRequest};\n`
-      : `var template = require(${templateRequest});\n`;
+      ? `import template from ${JSON.stringify(templateRequest)};\n`
+      : `var template = require(${JSON.stringify(templateRequest)});\n`;
   }
 
   return templateImport;
