@@ -13,7 +13,9 @@
     "lint": "prettier --write \"{src,test}/**/*.{ts,js}\"",
     "prepublishOnly": "npm run test && npm run build",
     "local": "npm pack && cp *.tgz examples/san-loader.tgz && del *.tgz",
-    "test": "jest"
+    "test": "run-p test:*",
+    "test:unit": "jest test/unit",
+    "test:e2e": "jest test/e2e --no-cache"
   },
   "keywords": [
     "san",

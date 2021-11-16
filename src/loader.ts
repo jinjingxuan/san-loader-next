@@ -14,7 +14,7 @@ import transformStyle from './transform/style';
 import { getDescriptor, setDescriptor } from './utils';
 
 const defaultOptions: Options = {
-  esModule: false,
+  esModule: true,
   compileANode: false,
 };
 
@@ -23,7 +23,7 @@ export default function (source) {
   const options: Options = { ...defaultOptions, ...userOptions };
 
   const filename = this.resourcePath;
-  const sourceRoot = this.context;
+  const sourceRoot = this.context || process.cwd();
   const rawQuery = this.resourceQuery.slice(1);
   const query = qs.parse(rawQuery);
 
@@ -77,25 +77,28 @@ export default function (source) {
     setDescriptor(filename, descriptor);
 
     // 生成入口文件
-    const templateImport = generateTemplateImport(descriptor, scopeId);
-    const stylesImport = generateStyleImport(
-      descriptor,
-      scopeId,
-      !!options.styleCompileOptions?.preprocessLang
-    );
-    const scriptImport = generateScriptImport(descriptor, scopeId);
+    const templateImport = generateTemplateImport(descriptor, scopeId, options);
+    const stylesImport = generateStyleImport(descriptor, scopeId, options);
+    const scriptImport = generateScriptImport(descriptor, scopeId, options);
 
     const runtimeCodePath = stringifyRequest(
       this,
       require.resolve('./runtime.js')
     );
 
+    const importStr = options.esModule
+      ? `import $runtime from ${runtimeCodePath};`
+      : `var $runtime = require(${runtimeCodePath});`;
+    const exportStr = options.esModule
+      ? 'export default $runtime(script, template, $style);'
+      : 'module.exports.default = $runtime(script, template, $style);';
+
     const output = [
-      `import $runtime from ${runtimeCodePath};`,
+      importStr,
       scriptImport,
       templateImport,
       stylesImport,
-      'export default $runtime(script, template, $style);',
+      exportStr,
       '/* san-hmr component */',
     ];
 

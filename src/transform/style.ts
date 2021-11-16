@@ -24,8 +24,9 @@ export default (
     .some((lang) => query.lang === lang);
 
   if (ifCSSHashMap) {
+    const exportStr = options.esModule ? 'export default' : 'module.exports=';
     return {
-      code: `export default ${JSON.stringify(result.cssHashMap)}`,
+      code: exportStr + JSON.stringify(result.cssHashMap),
       map: null,
     };
   } else {

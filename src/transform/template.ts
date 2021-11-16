@@ -15,12 +15,12 @@ export default (
     filename: query.filename!,
     id: `data-s-${query.id}`,
     scoped,
-    compileANode: query.compileANode as any,
+    compileANode: options.compileANode || (query.compileANode as any),
     ...options.templateCompileOptions,
   });
 
   return {
-    code: result.code, // `export default ${JSON.stringify(result.code)};`,
+    code: result.code,
     map: normalizeSourceMap(result.map!, request, filename),
   };
 };
