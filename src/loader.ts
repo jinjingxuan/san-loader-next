@@ -99,8 +99,6 @@ export default function (source) {
       '/* san-hmr component */',
     ];
 
-    console.log(output);
-
     this.callback(null, output.join('\n'));
   }
 }

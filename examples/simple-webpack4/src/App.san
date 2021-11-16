@@ -1,5 +1,5 @@
 <template>
-  <div class="content">Hello {{name}}!</div>
+  <div class="{{$style.content}}">Hello {{name}}!</div>
 </template>
 
 <script>
@@ -12,8 +12,14 @@ export default {
 };
 </script>
 
-<style>
+<style module>
 .content {
-  color: blue;
+  color: green;
+}
+</style>
+
+<style>
+div {
+  font-size: 40px;
 }
 </style>

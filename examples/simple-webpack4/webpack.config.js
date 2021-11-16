@@ -11,12 +11,9 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
   },
-  resolve: {
-    extensions: ['', '.js', '.jsx', '.css']
+  externals: {
+    san: 'san', // 这里拆一下，把 san 挂载到 window 上，用 cdn 加载
   },
-  // externals: {
-  //   san: 'san', // 这里拆一下，把 san 挂载到 window 上，用 cdn 加载
-  // },
   devtool: 'inline-source-map',
   devServer: {
     open: true,

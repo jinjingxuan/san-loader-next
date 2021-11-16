@@ -1,0 +1,25 @@
+<template>
+  <div class="{{$style.content}}">Hello {{name}}!</div>
+</template>
+
+<script>
+export default {
+  initData() {
+    return {
+      name: 'San',
+    };
+  },
+};
+</script>
+
+<style module>
+.content {
+  color: green;
+}
+</style>
+
+<style>
+div {
+  font-size: 40px;
+}
+</style>
