@@ -81,17 +81,17 @@ export default function (source) {
     const stylesImport = generateStyleImport(descriptor, scopeId, options);
     const scriptImport = generateScriptImport(descriptor, scopeId, options);
 
-    const runtimeCodePath = stringifyRequest(
+    const normalizePath = stringifyRequest(
       this,
-      require.resolve('./runtime.js')
+      require.resolve('./normalize.js')
     );
 
     const importStr = options.esModule
-      ? `import $runtime from ${runtimeCodePath};`
-      : `var $runtime = require(${runtimeCodePath});`;
+      ? `import normalize from ${normalizePath};`
+      : `var normalize = require(${normalizePath});`;
     const exportStr = options.esModule
-      ? 'export default $runtime(script, template, $style);'
-      : 'module.exports.default = $runtime(script, template, $style);';
+      ? 'export default normalize(script, template, $style);'
+      : 'module.exports.default = normalize(script, template, $style);';
 
     const output = [
       importStr,

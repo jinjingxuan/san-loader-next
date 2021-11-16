@@ -11,7 +11,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-
 const { SanLoaderPlugin } = require('san-loader');
 
 module.exports = {
@@ -31,7 +30,7 @@ module.exports = {
             loader: require.resolve('san-hot-loader'),
           },
           {
-            loader: 'san-loader'
+            loader: 'san-loader',
           },
         ],
       },
@@ -92,6 +91,7 @@ module.exports = {
       {
         test: /\.less$/,
         oneOf: [
+          // 这里匹配 `<style lang="less" module>`
           {
             resourceQuery: /module/,
             use: [
@@ -156,6 +156,7 @@ module.exports = {
               },
             ],
           },
+          // 这里匹配 `<style>`
           {
             use: [
               {
@@ -190,7 +191,7 @@ module.exports = {
               {
                 loader: 'html-loader',
                 options: {
-                  esModule: true,
+                  esModule: false,
                   minimize: false,
                 },
               },

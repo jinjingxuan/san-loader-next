@@ -32,13 +32,19 @@ module.exports = function (script, template, injectStyles) {
         dfns[i].aNode = template;
       }
     }
-    injectStylesIntoInitData(dfns[i], injectStyles);
+    if (injectStyles.length) {
+      injectStylesIntoInitData(dfns[i], injectStyles);
+    }
   }
 
   return typeof script === 'object' ? defineComponent(script) : script;
 };
 
-function injectStylesIntoInitData(proto, style) {
+function injectStylesIntoInitData(proto, injectStyles) {
+  var style = {};
+  for (var i = 0; i < injectStyles.length; i++) {
+    objectAssign(style, injectStyles[i]);
+  }
   var origin =
     typeof proto === 'function'
       ? proto.prototype.initData || __noData // class component
