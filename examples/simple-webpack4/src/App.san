@@ -1,4 +1,4 @@
-<template>
+<template compileANode="aPack">
   <div class="{{$style.content}}">Hello {{name}}!</div>
 </template>
 

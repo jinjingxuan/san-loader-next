@@ -1,4 +1,4 @@
-# San-Loader Webpack 配置实例 
+# San-Loader Webpack 配置实例（webpack4）
 
 这里是一个使用 San Loader 的示例项目，演示了如何在 webpack 中配置 san-loader，以及如何构建、如何在 HTML 中使用产出的 bundle。
 
@@ -10,21 +10,21 @@
 npm install
 ```
 
-调用 webpack 进行构建，将会产生 dist/bundle.js 和 dist/index.html：
+生产模式：
 
 ```bash
 npm run build
 ```
 
-启动 HTTP 服务，访问提示的地址即可看到构建得到的 San 应用：
+开发模式：
 
 ```bash
-npm start
+npm run dev
 ```
 
 ## 目录结构
 
-```
+```shell
 examples
 ├── assets              # 静态资源
 ├── dist

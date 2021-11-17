@@ -1,5 +1,5 @@
 const loader = require('../../dist/index.js').default;
-const webpackContext = require('./webpack-context.stub');
+const webpackContext = require('../webpack-context');
 
 describe('.san 文件的产出', () => {
   test('整体框架', () => {
@@ -18,12 +18,12 @@ describe('.san 文件的产出', () => {
       loader,
       source
     );
-    expect(ctx.code).toContain('import $runtime from');
+    expect(ctx.code).toContain('import normalize from');
     expect(ctx.code).toContain('import template from');
     expect(ctx.code).toContain('import script from');
     expect(ctx.code).toContain('import style0 from');
     expect(ctx.code).toContain(
-      'export default $runtime(script, template, $style);'
+      'export default normalize(script, template, $style);'
     );
   });
 

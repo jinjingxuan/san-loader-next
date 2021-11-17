@@ -1,5 +1,5 @@
 const loader = require('../../dist/index.js').default;
-const webpackContext = require('./webpack-context.stub');
+const webpackContext = require('../webpack-context');
 
 describe('.san 文件的产出', () => {
   test('导入 <script> 部分', () => {

@@ -36,16 +36,38 @@ const config = {
         loader: 'babel-loader',
       },
       {
-        test: /\.((c|sa|sc)ss)$/i,
-        use: [
-          'style-loader',
+        test: /\.css$/,
+        oneOf: [
+          // 这里匹配 `<style module>`
           {
-            loader: 'css-loader',
-            options: {
-              // Run `postcss-loader` on each CSS `@import` and CSS modules/ICSS imports, do not forget that `sass-loader` compile non CSS `@import`'s into a single file
-              // If you need run `sass-loader` and `postcss-loader` on each CSS `@import` please set it to `2`
-              importLoaders: 1,
-            },
+            resourceQuery: /module/,
+            use: [
+              'style-loader',
+              {
+                loader: 'css-loader',
+                options: {
+                  modules: {
+                    localIdentName: '[local]_[hash:base64:5]',
+                  },
+                  localsConvention: 'camelCase',
+                  sourceMap: true,
+                },
+              },
+            ],
+          },
+          // 这里匹配 `<style>`
+          {
+            use: [
+              {
+                loader: 'style-loader',
+              },
+              {
+                loader: 'css-loader',
+                options: {
+                  sourceMap: true,
+                },
+              },
+            ],
           },
         ],
       },
@@ -54,6 +76,10 @@ const config = {
         use: ['html-loader'],
       },
     ],
+  },
+  // for jest
+  resolveLoader: {
+    modules: [path.resolve(__dirname, 'node_modules')],
   },
 };
 

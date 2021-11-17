@@ -12,15 +12,15 @@ const path = require('path');
 const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const { SanLoaderPlugin } = require('san-loader');
+const isProduction = process.env.NODE_ENV == 'production';
 
-module.exports = {
+const config = {
   entry: path.resolve(__dirname, './src/index.js'),
   output: {
-    filename: 'bundle.js',
+    filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
   },
   devtool: 'inline-source-map',
-  mode: 'development',
   module: {
     rules: [
       {
@@ -217,6 +217,10 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.ts', '.san', '.json'],
   },
+  // for jest
+  resolveLoader: {
+    modules: [path.resolve(__dirname, 'node_modules')],
+  },
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     overlay: true,
@@ -235,4 +239,13 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ],
+};
+
+module.exports = () => {
+  if (isProduction) {
+    config.mode = 'production';
+  } else {
+    config.mode = 'development';
+  }
+  return config;
 };

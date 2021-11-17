@@ -1,5 +1,5 @@
 const loader = require('../../dist/index.js').default;
-const webpackContext = require('./webpack-context.stub');
+const webpackContext = require('../webpack-context');
 
 describe('.san 文件的产出', () => {
   test('导入 <style> 部分', () => {
@@ -30,8 +30,6 @@ describe('.san 文件的产出', () => {
       source
     );
     expect(ctx.code).toContain('module=true');
-    expect(ctx.code).toContain(
-      'import style0 from "./s.less?san&type=style&index=0&src'
-    );
+    expect(ctx.code).toContain('import style0 from "./s.less?module=true');
   });
 });
