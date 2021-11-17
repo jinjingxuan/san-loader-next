@@ -2,7 +2,7 @@
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { SanLoaderPlugin } = require('san-loader');
+const { SanLoaderPlugin } = require('san-loader-next');
 
 const isProduction = process.env.NODE_ENV == 'production';
 
@@ -29,7 +29,7 @@ const config = {
     rules: [
       {
         test: /\.san$/,
-        use: [{ loader: 'san-loader', options: { esModule: false } }],
+        use: [{ loader: 'san-loader-next', options: { esModule: false } }],
       },
       {
         test: /\.(js|jsx)$/i,

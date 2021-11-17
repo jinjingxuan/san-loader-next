@@ -21,7 +21,7 @@
     "less-loader": "^10.2.0",
     "html-webpack-plugin": "^5.5.0",
     "style-loader": "^3.3.1",
-    "san-loader": "../san-loader.tgz"
+    "san-loader-next": "^0.1.0"
   },
   "babel": {
     "presets": [

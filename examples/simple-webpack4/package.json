@@ -19,7 +19,7 @@
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "3.10.1",
-    "san-loader": "../san-loader.tgz"
+    "san-loader-next": "^0.1.0"
   },
   "babel": {
     "presets": [

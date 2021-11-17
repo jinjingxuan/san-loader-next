@@ -11,7 +11,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-const { SanLoaderPlugin } = require('san-loader');
+const { SanLoaderPlugin } = require('san-loader-next');
 const isProduction = process.env.NODE_ENV == 'production';
 
 const config = {
@@ -30,7 +30,7 @@ const config = {
             loader: require.resolve('san-hot-loader'),
           },
           {
-            loader: 'san-loader',
+            loader: 'san-loader-next',
           },
         ],
       },

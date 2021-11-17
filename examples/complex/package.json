@@ -25,7 +25,7 @@
     "san-hot-loader": "^0.1.1",
     "san-store": "^2.0.2",
     "san-update": "^2.1.0",
-    "san-loader": "../san-loader.tgz",
+    "san-loader-next": "^0.1.0",
     "style-loader": "^1.2.1",
     "url-loader": "^4.1.0",
     "webpack": "^4.43.0",
