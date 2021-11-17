@@ -11,7 +11,7 @@
     "dev": "del dist/ && tsc -w",
     "build": "npm run lint && del dist/ && tsc",
     "lint": "prettier --write \"{src,test}/**/*.{ts,js}\"",
-    "prepublishOnly": "npm run test && npm run build",
+    "prepublishOnly": "npm test && npm run build",
     "tar": "npm pack && cp -r ./*.tgz examples/san-loader.tgz && del ./*.tgz",
     "local": "npm run build && cp -r dist/* examples/complex/node_modules/san-loader/dist",
     "test": "run-p test:*",

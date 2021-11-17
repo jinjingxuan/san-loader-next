@@ -105,3 +105,6 @@ yarn-error.log
 .vscode/
 
 **/**/.DS_Store
+
+yarn.lock
+package-lock.json

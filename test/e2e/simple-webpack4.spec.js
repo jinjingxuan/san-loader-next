@@ -19,7 +19,7 @@ describe('simple-webpack4', () => {
     let aNode = aNodeUtils.parseTemplate(
       `<div class="{{$style.content}}">Hello {{name}}!</div>`
     );
-    const aPack = aNodeUtils.pack(aNode.children[0]);  
+    const aPack = aNodeUtils.pack(aNode.children[0]);
     expect(result).toBeTruthy();
     expect(result).toContain(JSON.stringify(aPack));
   });

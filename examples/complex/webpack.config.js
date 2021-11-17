@@ -219,7 +219,11 @@ const config = {
   },
   // for jest
   resolveLoader: {
-    modules: [path.resolve(__dirname, 'node_modules')],
+    modules: [
+      path.resolve(__dirname, 'node_modules'),
+      // workspace
+      path.resolve(__dirname, '../node_modules'),
+    ],
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
