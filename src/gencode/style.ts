@@ -21,7 +21,7 @@ export default (
       const query = `?san&type=style&index=${i}${srcQuery}${idQuery}`;
 
       if (style.src) {
-        styleRequest = style.src + '?module=';
+        styleRequest = style.src + '?module=true';
       } else {
         styleRequest = src + query + attrsQuery;
       }

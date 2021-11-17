@@ -78,10 +78,3 @@ export function getDescriptor(id: string) {
   }
   return null;
 }
-
-export const getPath = (src: string, filePath: string) => {
-  const dir = path.dirname(filePath);
-  const srcPath = path.resolve(dir, src);
-
-  return srcPath;
-};
