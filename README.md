@@ -32,13 +32,31 @@ let app = new App();
 app.attach(document.body);
 ```
 
+## 功能
+
+类似 vue-loader，本插件支持很多有用的功能：
+
+- scoped css
+
+- css modules （需要 style-loader、css-loader）
+
+- template 编译 aNode / aPack [文档](https://github.com/baidu/san/blob/master/doc/anode.md)
+
+- less 等 css 预处理器（需要自行安装配套包）
+
+- pug 等 html 预处理器（需要自行安装配套包）
+
+- typescript 等 js 方言（需要自行安装配套包）
+
+等等。
+
 ## 使用
 
 ```shell
 npm install --save-dev san-loader-next
 ```
 
-基本配置：
+### 基本配置
 
 ```js
 const { SanLoaderPlugin } = require('san-loader-next');
@@ -58,7 +76,7 @@ module.exports = {
 };
 ```
 
-复杂的配置：
+### 复杂一些的配置
 
 ```js
 const { SanLoaderPlugin } = require('san-loader-next');
@@ -94,12 +112,12 @@ module.exports = {
 
 ## 配置
 
-|          名称          |         可选值         |   默认   | 备注                                                                                               |
-| :--------------------: | :--------------------: | :------: | :------------------------------------------------------------------------------------------------- |
-|     `compileANode`     | 'none'/'aPack'/'aNode' | `'none'` | 将组件的 `template` 编译成 `aPack` 或 `aNode`                                                      |
-|       `esModule`       |     `true / false`     |  `true`  | san-loader-next 默认使用 ESM 模块语法来生成 JS 模块，将该参数设为 false 可以改用 CommonJS 模块语法 |
-| templateCompileOptions |  compileTemplate 选项  |  Object  | 透传 san-sfc-compiler                                                                              |
-|  styleCompileOptions   |   compileStyle 选项    |  Object  | 透传 san-sfc-compiler                                                                              |
+|          名称          |          可选值          |   默认   | 备注                                                                                               |
+| :--------------------: | :----------------------: | :------: | :------------------------------------------------------------------------------------------------- |
+|     `compileANode`     | `'none'/'aPack'/'aNode'` | `'none'` | 将组件的 `template` 编译成 `aPack` 或 `aNode`                                                      |
+|       `esModule`       |      `true / false`      |  `true`  | san-loader-next 默认使用 ESM 模块语法来生成 JS 模块，将该参数设为 false 可以改用 CommonJS 模块语法 |
+| templateCompileOptions | 详见 `san-sfc-compiler`  | `Object` | 透传 `san-sfc-compiler`                                                                            |
+|  styleCompileOptions   | 详见 `san-sfc-compiler`  | `Object` | 透传 `san-sfc-compiler`                                                                            |
 
 templateCompileOptions 和 styleCompileOptions 详见 [san-sfc-compiler](https://github.com/wanwu/san-sfc-compiler/)
 
