@@ -143,6 +143,8 @@ templateCompileOptions 和 styleCompileOptions 详见 [san-sfc-compiler](https:/
 
 ## 参考
 
+- [vue-loader](https://github.com/vuejs/vue-loader)
+
 - [旧版 san-loader](https://github.com/ecomfe/san-loader)
 
 - [san-sfc-compiler](https://github.com/wanwu/san-sfc-compiler/)
