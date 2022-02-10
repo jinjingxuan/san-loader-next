@@ -4,9 +4,12 @@ const RuleSet = require('webpack/lib/RuleSet');
 const id = 'san-loader-plugin';
 const NS = 'san-loader';
 
+// SanLoaderPlugin 导出的是一个类
 class SanLoaderPlugin {
   static NS?: string;
   apply(compiler) {
+
+    // 在 normalModuleLoader 钩子执行前调用代码：loaderContext[NS] = true
     compiler.hooks.compilation.tap(id, (compilation) => {
       const normalModuleLoader = compilation.hooks.normalModuleLoader;
       normalModuleLoader.tap(id, (loaderContext) => {
@@ -14,17 +17,24 @@ class SanLoaderPlugin {
       });
     });
 
+    // 获取原始配置的规则
     const rawRules = compiler.options.module.rules;
     const { rules } = new RuleSet(rawRules);
 
+    // cloneRules 的职责是将你定义过的其它规则复制并应用到 .san 文件里相应语言的块。
+    // 例如，如果你有一条匹配 /\.js$/ 的规则，那么它会应用到 .san 文件里的 <script> 块。
+
+    // 首先找到 san 文件应用 san-loader 的规则，cloneRules 中不包括这一条
     let sanRuleIndex = rawRules.findIndex(createMatcher('foo.san'));
     if (sanRuleIndex < 0) {
       sanRuleIndex = rawRules.findIndex(createMatcher('foo.san.html'));
     }
 
+    // 生成 clonedRules
     const sanRule = rules[sanRuleIndex];
     const clonedRules = rules.filter((r) => r !== sanRule).map(cloneRule);
 
+    // 更改 rules
     compiler.options.module.rules = [...clonedRules, ...rules];
   }
 }
@@ -39,6 +49,11 @@ function createMatcher(fakeFile) {
     );
   };
 }
+
+/**
+ *  resource: 被处理资源的绝对路径
+ *  resourceQuery: 被处理资源的绝对路径中？后面的部分
+ */
 
 function cloneRule(rule) {
   const { resource, resourceQuery } = rule;

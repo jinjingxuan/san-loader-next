@@ -13,18 +13,34 @@ import transformTemplate from './transform/template';
 import transformStyle from './transform/style';
 import { getDescriptor, setDescriptor } from './utils';
 
+// 默认配置
 const defaultOptions: Options = {
   esModule: true,
   compileANode: false,
 };
 
 export default function (source) {
+  // 获取用户在 webpack.config 中的配置
   const userOptions = getOptions(this);
   const options: Options = { ...defaultOptions, ...userOptions };
 
+  // san 文件绝对路径: /Users/san-loader-next/examples/simple-webpack4/src/App.san
   const filename = this.resourcePath;
+  // san 文件上一层路径：/Users/san-loader-next/examples/simple-webpack4/src
   const sourceRoot = this.context || process.cwd();
+  
+  /**
+   * rawQuery:
+   * 
+   * san&type=script&id=472cf1bd&lang=js
+   * san&type=template&id=472cf1bd&compileANode=aPack&lang=html
+   * san&type=style&index=0&id=472cf1bd&module=true&lang=css
+   * san&type=style&index=1&id=472cf1bd&lang=css
+   */
+
   const rawQuery = this.resourceQuery.slice(1);
+
+  // 解析 query 为对象
   const query = qs.parse(rawQuery);
 
   if (query && 'san' in query) {
@@ -55,6 +71,7 @@ export default function (source) {
         map: descriptor?.script?.map,
       };
     }
+    console.log('result', result)
     if (this.sourceMap) {
       this.callback(null, result.code, result.map);
     } else {
@@ -81,6 +98,7 @@ export default function (source) {
     const stylesImport = generateStyleImport(descriptor, scopeId, options);
     const scriptImport = generateScriptImport(descriptor, scopeId, options);
 
+    // normalize.js 的绝对路径
     const normalizePath = stringifyRequest(
       this,
       require.resolve('./normalize.js')
