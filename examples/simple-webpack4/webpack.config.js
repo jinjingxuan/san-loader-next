@@ -29,7 +29,7 @@ const config = {
     rules: [
       {
         test: /\.san$/,
-        use: [{ loader: 'san-loader-next', options: { esModule: false } }],
+        use: [{ loader: 'san-loader-next'}],
       },
       {
         test: /\.(js|jsx)$/i,

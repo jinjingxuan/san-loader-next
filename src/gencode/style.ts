@@ -28,14 +28,10 @@ export default (
 
       if (style.module) {
         const styleVar = `style${i}`;
-        stylesCode += options.esModule
-          ? `\nimport ${styleVar} from ${JSON.stringify(styleRequest)};`
-          : `\nvar ${styleVar} = require(${JSON.stringify(styleRequest)});`;
+        stylesCode += `\nimport ${styleVar} from ${JSON.stringify(styleRequest)};`;
         $style.push(styleVar);
       } else {
-        stylesCode += options.esModule
-          ? `\nimport ${JSON.stringify(styleRequest)};`
-          : `\nrequire(${JSON.stringify(styleRequest)});`;
+        stylesCode += `\nimport ${JSON.stringify(styleRequest)};`;
       }
 
       stylesCode += `$style = [${$style.join(', ')}];\n`;

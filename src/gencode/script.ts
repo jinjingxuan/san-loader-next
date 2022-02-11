@@ -18,11 +18,7 @@ export default (
     const srcQuery = script.src ? `&src` : ``;
     const query = `?san&type=script${idQuery}${srcQuery}${attrsQuery}`;
     const scriptRequest = JSON.stringify(src + query);
-    scriptImport = options.esModule
-      ? `import script from ${scriptRequest};\n` +
-        `export * from ${scriptRequest};`
-      : `var script = require(${scriptRequest}).default;\n` +
-        `module.exports = require(${scriptRequest});`;
+    scriptImport = `import script from ${scriptRequest};\n` + `export * from ${scriptRequest};`
   }
 
   return scriptImport;

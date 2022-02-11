@@ -115,7 +115,6 @@ module.exports = {
 |          名称          |          可选值          |   默认   | 备注                                                                                               |
 | :--------------------: | :----------------------: | :------: | :------------------------------------------------------------------------------------------------- |
 |     `compileANode`     | `'none'/'aPack'/'aNode'` | `'none'` | 将组件的 `template` 编译成 `aPack` 或 `aNode`                                                      |
-|       `esModule`       |      `true / false`      |  `true`  | san-loader-next 默认使用 ESM 模块语法来生成 JS 模块，将该参数设为 false 可以改用 CommonJS 模块语法 |
 | templateCompileOptions | 详见 `san-sfc-compiler`  | `Object` | 透传 `san-sfc-compiler`                                                                            |
 |  styleCompileOptions   | 详见 `san-sfc-compiler`  | `Object` | 透传 `san-sfc-compiler`                                                                            |
 

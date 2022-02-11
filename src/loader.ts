@@ -14,7 +14,6 @@ import transformStyle from './transform/style';
 import { getDescriptor, setDescriptor } from './utils';
 
 const defaultOptions: Options = {
-  esModule: true,
   compileANode: false,
 };
 
@@ -86,12 +85,8 @@ export default function (source) {
       require.resolve('./normalize.js')
     );
 
-    const importStr = options.esModule
-      ? `import normalize from ${normalizePath};`
-      : `var normalize = require(${normalizePath});`;
-    const exportStr = options.esModule
-      ? 'export default normalize(script, template, $style);'
-      : 'module.exports.default = normalize(script, template, $style);';
+    const importStr = `import normalize from ${normalizePath};`;
+    const exportStr = 'export default normalize(script, template, $style);';
 
     const output = [
       importStr,

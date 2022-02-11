@@ -24,9 +24,7 @@ export default (
       templateRequest = src + query;
     }
 
-    templateImport = options.esModule
-      ? `import template from ${JSON.stringify(templateRequest)};\n`
-      : `var template = require(${JSON.stringify(templateRequest)});\n`;
+    templateImport = `import template from ${JSON.stringify(templateRequest)};\n`;
   }
 
   return templateImport;

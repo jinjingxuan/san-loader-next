@@ -10,7 +10,7 @@
 
 /* eslint-disable prefer-rest-params */
 
-var defineComponent = require('san').defineComponent;
+import { defineComponent } from 'san';
 
 /**
  * 处理 .san 组件 script 与 template 等部分的组合方法
@@ -20,7 +20,7 @@ var defineComponent = require('san').defineComponent;
  * @param {string} injectStyles 组件需要注入的 style 列表
  * @return {Class} 组件类
  */
-module.exports = function (script, template, injectStyles) {
+export default function (script, template, injectStyles) {
   var dfns = componentDefinitions(script);
   for (var i = 0; i < dfns.length; i++) {
     if (template) {
